@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>profile Page</title>
+    <style>
+        h1{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <%- include('common/header'); %>
+    <h1>profile Page <%= user.name%></h1>
+     <ul>
+        <% user.skill.forEach((item)=>{ %>
+           <li> <%= item %></li>
+        <% }) %>
+     </ul> 
+</body>
+</html>
