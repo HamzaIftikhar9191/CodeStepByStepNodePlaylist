@@ -555,10 +555,315 @@
 
 
 // ////////////////////////////// Video # 39
-// ////// Mongooes
+// ////// Mongooes is an advance version of mongodb
 
 // ///// What is schema  (schema is appling validations)
 // ///// What is model (model is used to connect the mongodb with nodejs)
 
  
+// ////////////////////////////// Video # 40
 
+// ///////// CRUD with Mongoose
+
+// const mongoose = require('mongoose');
+// mongoose.connect('mongodb://localhost:27017/e-com');
+
+// const productSchema = new mongoose.Schema({
+//     name: String,
+//     price: Number,
+//     brand: String,
+//     category: String
+
+// });
+
+// const saveInDB = async () => {
+//     const Product = mongoose.model('products', productSchema);
+//     let data = new Product({
+//         name: "max 100",
+//         price: 200,
+//         brand: 'maxx',
+//         category: 'Mobile'
+//     });
+//     const result = await data.save();
+//     console.log(result);
+// }
+
+// const updateInDB =async  () => {
+//     const Product = mongoose.model('products', productSchema);
+//     let data =await  Product.updateOne(
+//         { name: "hamza Iftikhar" },
+//         {
+//             $set: { price: 950,name:'max pro 6' }
+//         }
+//     )
+//     console.log(data)
+// }
+
+// const deleteInDB = async ()=>{
+//     const Product = mongoose.model('products', productSchema);
+//     let data = await Product.deleteOne({name:'max 100'})
+//     console.log(data);
+// }
+// const findInDB = async ()=>{
+//     const Product = mongoose.model('products', productSchema);
+//     let data = await Product.find()
+//     console.log(data);
+// }
+
+
+// //// saveInDB();
+// //// updateInDB();
+// //// deleteInDB();
+
+// findInDB();
+
+
+// ////////////////////////////// Video # 41 , 42
+
+// /////////////Making API with Mongoose
+
+// //////config.js is used to configure the mongoose connection
+// //////products.js is used to define the schema and model
+
+// ///// GET API  ( when read data using API in database)                      
+// ///// POST API  ( when save new data using API in database )         
+// ///// PUT API  (when update data using API in database)             
+// ///// DELETE API  (when delete data using API in database)          
+
+// const express = require('express');
+// require("./config");
+// const Product = require('./product');
+// const app = express();
+
+// app.use(express.json());  // when data comes it is in string so use this to convert into json format
+
+// // ///// POST API  ( when save new data using API in database )         
+
+// app.post("/create", async (req, resp) => {
+//     let data = new Product(req.body);
+//     const result = await data.save();
+//     resp.send(result);
+// });
+
+// // ///// GET API  ( when read data using API in database)                      
+
+// app.get("/list", async (req, resp) => {
+//     let data = await Product.find();
+//     resp.send(data);
+// })
+
+// // ///// DELETE API  (when delete data using API in database)          
+
+// app.delete("/delete/:_id", async (req, resp) => {
+//     console.log(req.params)
+//     let data = await Product.deleteOne(req.params);
+//     resp.send(data);
+// })
+
+// // ///// PUT API  (when update data using API in database)             
+
+// app.put("/update/:_id",async (req, resp) => {
+//     console.log(req.params)
+//     let data = await Product.updateOne(
+//         req.params,
+//         {$set: req.body}
+//     );
+//     resp.send(data);
+// })
+
+// app.listen(4501)
+
+
+// ////////////////////////////// Video # 43
+
+// //////Search API with multiple search parameters
+
+// const express = require('express');
+// require("./config");
+// const Product = require('./product');
+// const app = express();
+
+// app.use(express.json());
+
+// app.get("/search/:key",async (req,resp)=>{
+//     console.log(req.params.key);
+//     let data = await Product.find(
+//         {
+//             "$or":[
+//                 {name:{$regex:req.params.key}},    //// name and brand are multiple search parameters 
+//                 {brand:{$regex:req.params.key}}
+//             ]
+//         }
+//     )
+//     resp.send(data);
+
+// })
+
+
+// app.listen(4501)
+
+// ////////////////////////////// Video # 44
+ 
+// //// Upload file using multer 
+
+// const express = require('express');
+// const multer = require('multer');
+
+// const app = express();
+
+// const upload = multer({
+//     storage: multer.diskStorage({
+//         destination: function (req, file, cb) {
+//             cb(null, 'NODE')     //// NODE is the folder_name where the file is uploded you can also change the folder
+//         },
+//         filename: function (req, file, cb) {
+//             cb(null, file.fieldname + "-" + Date.now() + ".jpg")
+//         }
+//      })
+// }).single('file_name');  //// file_name is the key field from the postman
+
+// app.post("/upload", upload, (req, resp) => {
+//     resp.send("file upload")
+// });
+
+// app.listen(4501)
+
+
+// ////////////////////////////// Video # 45
+
+// //// OS module in Node.js 
+// //// commands used for check the specfication of the system 
+// ////(such as os.arch , os.freemem ,os.totalmem , os.platform , os.hostmane )
+
+// //// watch video for OS module commands   (Not such important)
+
+
+// ////////////////////////////// Video # 46
+
+// //// Events and Event Emitter in Node.js
+// //// check the code from video for events
+
+
+// ////////////////////////////// Video # 47
+
+// /////// REPL (Read-Evl-Print-Loop) is a command line tool
+// /////// we can run the Node.js and java script code on the REPL
+// /////// check video to use the REPL
+
+// ////Tell what is the error?
+
+// const x=10
+// console.log(x++)
+
+// //////solution is => let x=10
+
+
+// ////////////////////////////// Video # 48
+
+// ////// Connecting with SQl
+// ////// command for installing mySQL(npm i mysql)
+
+// ///// how to create table and enter data into the table in xampp (Watch from another video)
+
+
+// const mysql= require("mysql");
+
+// const con= mysql.createConnection({
+//   host:"localhost",
+//   user:"root",
+//   password:"",
+//   database:"test"     //// test is the default created database in xampp
+// });
+
+// con.connect((err)=>{
+//   if(err)
+//   {
+//     console.warn("not connect")
+//   }else{
+//     console.warn("connected!!!")
+//   }
+// })
+
+// ////// fetching data from database
+
+// con.query("select * from users",(err,result)=>{
+//   if(err)
+//   {
+//     console.warn("some error")
+//   }
+//   else{
+//     console.warn(result)
+//   }
+// })
+
+// ////////////////////////////// Video # 49
+
+// //////GET API with mySQL (Use when get the data)
+
+// //////configsql.js is used to configure the database
+
+// const express = require("express");
+// const con = require("./configsql");
+// const app = express();
+
+// //////GET API with mySQL (Use when get the data)
+// ////// getting data from mySQL database and showing into the postman
+
+// app.get("/", (req, resp) => {
+//   con.query("select * from users", (err, result) => {
+//     if (err) { resp.send("error in api") }
+//     else { resp.send(result) }
+//   })
+// });
+
+// app.listen(4501) 
+
+
+// ////////////////////////////// Video # 50 , 51 , 52
+
+// ////POST API with mySQL  (Use when insert the data)
+// ////PUT API with mySQL  (Use when update the data)
+// ////DELETE API with mySQL  (Use when delete the data)
+
+const express = require("express");
+const con = require("./configsql");
+const app = express();
+
+app.use(express.json());
+
+
+////POST API with mySQL  (Use when insert the data)
+
+app.post("/", (req, resp) => {
+  //const data = req.body;
+   const data = {name:"Hamza Iftikhar",password:'3030',user_type:"admin"}
+  con.query("INSERT INTO users SET?", data, (error, results, fields) => {
+    if (error) throw error;
+    resp.send(results)
+  })
+});
+
+////PUT API with mySQL  (Use when update the data)
+
+app.put("/:id",(req,resp)=>{
+  const data= [req.body.name,req.body.password,req.body.user_type,req.params.id];
+  con.query("UPDATE users SET name = ?, password = ?, user_type = ? WHERE id = ?",
+  data,(error,results,fields)=>{
+    if(error) throw error;
+    resp.send(results)
+  }
+)
+ 
+})
+
+// ////DELETE API with mySQL  (Use when delete the data)
+
+app.delete("/:id",(req,resp)=>{
+    con.query("DELETE FROM users WHERE id =" + req.params.id,(error,result)=>{
+        if(error) throw error;
+        resp.send(result)
+    });
+  })
+
+
+app.listen(4501)
